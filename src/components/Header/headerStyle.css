@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    align-items: flex-end;
+    background-color: #343a40; 
+    color: #fff; /* White text color */
+    font-weight: bold; /* Bold font weight */
+    padding-right: 1%;
+  }
+  
+  .header-item {
+    text-decoration: none;
+    margin-right: 5px;
+    color: white;
+    margin-left: 15px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .header-item:hover {
+    color: #70f2e9; /* Change text color on hover */
+  }
