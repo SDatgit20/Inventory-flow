@@ -11,7 +11,16 @@ class ItemService {
 
     // save item
     addItem(item){
-        return axios.post(Item_Base_URL, item);
+        const formData = new FormData();
+        formData.append('file', item.uploadedImage); // Assuming item.file is the uploaded file
+        formData.append('name', item.name);
+        formData.append('description', item.description);
+    
+        return axios.post(Item_Base_URL, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 
     // get item by id
@@ -23,7 +32,6 @@ class ItemService {
     getItemByName(itemName) {
         return axios.get(`${Item_Base_URL}/${itemName}`);
     }
-      
 }
 
 const itemService = new ItemService();

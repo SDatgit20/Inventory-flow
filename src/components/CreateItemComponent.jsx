@@ -7,7 +7,7 @@ class CreateItemComponent extends Component {
         this.state = {
             name: '',
             description: '',
-            uploadImage: null,
+            uploadedImage: null,
         };
 
         // binding item-name event handlers into constructor
@@ -15,6 +15,9 @@ class CreateItemComponent extends Component {
 
         // binding item-description event handlers into constructor
         this.changeItemDescriptionHandler = this.changeItemDescriptionHandler.bind(this);
+
+        // binding saveItemImage event handler (Add Item Image)
+        this.handleDrop = this.handleDrop.bind(this);
 
         // binding saveItem event handler (Add Item button)
         this.saveItem = this.saveItem.bind(this);
@@ -28,16 +31,22 @@ class CreateItemComponent extends Component {
         this.setState({name: event.target.value});
     }
 
-    hanldeImageChange = (event) => {
-        const file = event.target.files[0];
-        this.setState({ uploadedImage: file });
-    }
-
     // event handler for description field
     changeItemDescriptionHandler=(event)=>{
         this.setState({description: event.target.value});
     }
 
+    handleDrop(event) {
+        event.preventDefault();
+        const file = event.target.files[0];
+        if(file){
+            console.log("file here------->")
+        }
+        if(file){
+            console.log("file not here------->")
+        }
+        this.setState({ uploadedImage: file });
+    }
     // // cancel method --> once clicked it will navigate to item list page
     // cancel(){
     //     this.props.history.push('/items');
@@ -47,7 +56,7 @@ class CreateItemComponent extends Component {
     saveItem = async (e) => {
         e.preventDefault();
         let item = { name: this.state.name, description: this.state.description, uploadedImage: this.state.uploadedImage };
-        console.log('item =>', item);
+        console.log('item =>', item.name);
       
         try {
           await ItemService.addItem(item);
@@ -80,7 +89,7 @@ class CreateItemComponent extends Component {
                             <label>Upload Image</label>
                             <div className="dropbox" onDrop={this.handleDrop} onDragOver={this.allowDrop}>
                                 Drop image here or click to select
-                                <input type="file" name="image" className="form-control-file" onChange={this.handleImageChange} />
+                                <input type="file" name="image" className="form-control-file" onChange={this.handleDrop} />
                             </div>
                         </div>
                         <button className='btn btn-success' onClick={this.saveItem}>Add Item</button>

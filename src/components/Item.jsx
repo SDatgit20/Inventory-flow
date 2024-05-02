@@ -47,6 +47,7 @@ class Item extends Component {
                 id={item.id}
                 name={item.name}
                 description={item.description}
+                imageUrl= {item.imageUrl}
               />
             </div>
           ))}
