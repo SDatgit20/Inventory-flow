@@ -1,18 +1,18 @@
 package com.inventory.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.inventory.dto.Item;
 import com.inventory.service.ItemServiceImp;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -20,17 +20,55 @@ public class ItemController {
 	
 	@Autowired
 	private ItemServiceImp service;
-	
-//	add item to the List
+
+	private static final String UPLOAD_DIR = "src/images";
+
+	//	add item to the List
 	@PostMapping("/items")
-	public Item addItem(@RequestBody Item item){
+	public Item addItem(@RequestParam("file") MultipartFile file,
+						@RequestParam("name") String name,
+						@RequestParam("description") String description) {
+		// Save the file and get the URL
+		String imageUrl = saveFile(file);
+
+		// Create the item entity with the received data
+		Item item = new Item();
+		item.setName(name);
+		item.setDescription(description);
+		item.setImageUrl(imageUrl);
+
+		// Save the item entity
 		return service.addItem(item);
+	}
+
+	private String saveFile(MultipartFile file) {
+		String fileName = generateFileName(file.getOriginalFilename());
+		try {
+			Path filePath = Paths.get(UPLOAD_DIR + "/" + fileName);
+			Files.write(filePath, file.getBytes());
+			return fileName; // Return the URL of the saved file
+		} catch (IOException e) {
+			System.out.println(e.toString());
+			return null;
+		}
+	}
+
+	private String generateFileName(String originalFileName) {
+		String[] parts = originalFileName.split("\\.");
+		String extension = parts[parts.length - 1];
+		return UUID.randomUUID().toString() + "." + extension;
 	}
 	
 //	Get all the items from the list
 	@GetMapping("/items")
 	public List<Item> getAllItems(){
-		return service.getAllItems();
+		List<Item> items = service.getAllItems();
+		for (Item item : items) {
+			String fullImageUrl = "http://localhost:8080/images/" + item.getImageUrl();
+			item.setImageUrl(fullImageUrl);
+		}
+		System.out.println("path here------>"+items.get(0).getImageUrl());
+		return items;
 	}
 	
 //	Get item by its name
