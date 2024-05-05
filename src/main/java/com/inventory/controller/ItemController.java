@@ -21,7 +21,7 @@ public class ItemController {
 	@Autowired
 	private ItemServiceImp service;
 
-	private static final String UPLOAD_DIR = "src/images";
+	private static final String UPLOAD_DIR = "src/main/resources/static/images";
 
 	//	add item to the List
 	@PostMapping("/items")
@@ -29,13 +29,14 @@ public class ItemController {
 						@RequestParam("name") String name,
 						@RequestParam("description") String description) {
 		// Save the file and get the URL
-		String imageUrl = saveFile(file);
+		String fileName = saveFile(file);
+		String fullImageUrl= "http://localhost:8080/images/"+fileName;
 
 		// Create the item entity with the received data
 		Item item = new Item();
 		item.setName(name);
 		item.setDescription(description);
-		item.setImageUrl(imageUrl);
+		item.setImageUrl(fullImageUrl);
 
 		// Save the item entity
 		return service.addItem(item);
@@ -63,10 +64,6 @@ public class ItemController {
 	@GetMapping("/items")
 	public List<Item> getAllItems(){
 		List<Item> items = service.getAllItems();
-		for (Item item : items) {
-			String fullImageUrl = "http://localhost:8080/images/" + item.getImageUrl();
-			item.setImageUrl(fullImageUrl);
-		}
 		System.out.println("path here------>"+items.get(0).getImageUrl());
 		return items;
 	}
