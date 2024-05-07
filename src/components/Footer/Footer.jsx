@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './footerStyle.css'
+import './footerStyle.css';
 
 class Footer extends Component {
     constructor(props) {
@@ -11,13 +11,13 @@ class Footer extends Component {
         return (
             <div>
                 <footer className="footer">
-                    <div class="footer-data">
+                    <div className="footer-data">
                     <span className="text-muted">
                         Made by Srashti Deshmukh 
                     </span>
                     <br/>
                     </div>
-                    <a href="https://github.com/SDatgit20"><img src="./github1.png" class="icon-style" alt="Github icon"/></a>
+                    <a href="https://github.com/SDatgit20"><img src="../../../github1.png" class="icon-style" alt="Github icon"/></a>
                 </footer>
             </div>
         );

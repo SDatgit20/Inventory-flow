@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import ItemService from '../../service/ItemService';
-import './searchItem.css';
 import Card from '../card/Card';
+import './searchRecipe.css';
 
 class SearchItemComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchName: '',
-      items: null,
+      items: [],
     };
 
     // Binding the event handlers
@@ -18,20 +18,22 @@ class SearchItemComponent extends Component {
 
   // Handle changes in the Search Name input field
   changeSearchNameHandler(event) {
-    this.setState({ searchName: event.target.value });
-  }
-
-  // Handle search item button click
-  searchItem(event) {
-    event.preventDefault();
-    ItemService.getItemByName(this.state.searchName)
+    const { value } = event.target;
+    this.setState({ searchName: value });
+    // Fetch items related to the input
+    ItemService.getItemByName(value)
       .then((res) => {
         const items = res.data;
         this.setState({ items });
       })
       .catch((error) => {
-        console.log(error); // Handle any errors that occur during the API call
+        console.log(error);
       });
+  }
+
+  // Handle search item button click
+  searchItem(event) {
+    event.preventDefault();
   }
 
   render() {
@@ -48,26 +50,31 @@ class SearchItemComponent extends Component {
             className="search-input"
             value={this.state.searchName}
             onChange={this.changeSearchNameHandler}
+            list="itemNames" // Connect input with datalist
           />
+          <datalist id="itemNames">
+            {items.map(item => (
+              <option key={item.id} value={item.name} />
+            ))}
+          </datalist>
           <button type="submit" className="search-button">
             Search
           </button>
         </form>
 
-        {items && (
-          <div className="search-results">
-            {items.map(item => (
-              <div key={item.id} className="search-item">
+        {/* Display search results */}
+        <div className="search-results">
+          {items.map(item => (
+            <div key={item.id} className="search-item">
               <Card
-              id={item.id}
-              name={item.name}
-              description={item.description}
-              imageUrl= {item.imageUrl}
+                id={item.id}
+                name={item.name}
+                description={item.description}
+                imageUrl={item.imageUrl}
               />
-              </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

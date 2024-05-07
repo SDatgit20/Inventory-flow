@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ItemService from '../../service/ItemService';
-import './CreateItem.css'
+import './CreateRecipe.css'
 
 class CreateItemComponent extends Component {
     constructor(props) {
@@ -22,9 +22,6 @@ class CreateItemComponent extends Component {
 
         // binding saveItem event handler (Add Item button)
         this.saveItem = this.saveItem.bind(this);
-
-        // binding cancel method
-        // this.cancel = this.cancel.bind(this);
     }
 
     // event handler for name field
@@ -40,20 +37,9 @@ class CreateItemComponent extends Component {
     handleDrop(event) {
         event.preventDefault();
         const file = event.target.files[0];
-        if(file){
-            console.log("file here------->")
-        }
-        if(file){
-            console.log("file not here------->")
-        }
         this.setState({ uploadedImage: file });
     }
-    // // cancel method --> once clicked it will navigate to item list page
-    // cancel(){
-    //     this.props.history.push('/items');
-    // }
 
-    // save employee method --> gets called whenver we hit Add Item button (submit the form)
     saveItem = async (e) => {
         e.preventDefault();
         let item = { name: this.state.name, description: this.state.description, uploadedImage: this.state.uploadedImage };
@@ -77,12 +63,12 @@ class CreateItemComponent extends Component {
                 <div className="card-body">
                     <form action="">
                         <div className="form-group mb-3">
-                            <label>Item Name</label>
+                            <label>Recipe Name</label>
                             <input type="text" placeholder='Item Name' name='name' className='form-control'
                                 value={this.state.name} onChange={this.changeItemNameHandler} />
                         </div>
                         <div className="form-group mb-3">
-                            <label>Item Description</label>
+                            <label>Recipe Description</label>
                             <input type="text" placeholder='Item Description' name='description' className='form-control'
                                 value={this.state.description} onChange={this.changeItemDescriptionHandler} />
                         </div>
@@ -93,8 +79,7 @@ class CreateItemComponent extends Component {
                                 <input type="file" name="image" className="form-control-file" onChange={this.handleDrop} />
                             </div>
                         </div>
-                        <button className='btn btn-success' onClick={this.saveItem}>Add Item</button>
-                        {/* <button className='btn btn-danger' onClick={this.cancel.bind(this)} style={{marginLeft:"10px"}}>Cancel</button> */}
+                        <button className='btn btn-success' onClick={this.saveItem}>Add Recipe</button>
                     </form>
                 </div>
             </div>
