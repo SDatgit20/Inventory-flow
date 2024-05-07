@@ -1,9 +1,9 @@
 .header {
     display: flex;
     align-items: flex-end;
-    background-color: #343a40; 
+    background-color: black; 
     color: #fff; /* White text color */
-    font-weight: bold; /* Bold font weight */
+    font-weight: 200; /* Bold font weight */
     padding-right: 1%;
   }
   

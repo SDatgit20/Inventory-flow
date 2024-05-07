@@ -2,11 +2,11 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Footer from './components/Footer';
+import Footer from './components/Footer/Footer';
 import Item from './components/Item';
-import CreateItemComponent from './components/CreateItemComponent';
+import CreateItemComponent from './components/AddItem/CreateItemComponent';
 import UpdateItemComponent from './components/UpdateItemComponent';
-import SearchItemComponent from './components/SearchItemComponent';
+import SearchItemComponent from './components/SearchComponent/SearchItemComponent';
 
 function App() {
   return (

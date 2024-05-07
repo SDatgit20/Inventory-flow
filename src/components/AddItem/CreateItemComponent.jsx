@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ItemService from '../service/ItemService';
+import ItemService from '../../service/ItemService';
+import './CreateItem.css'
 
 class CreateItemComponent extends Component {
     constructor(props) {
@@ -72,7 +73,7 @@ class CreateItemComponent extends Component {
     <div className="container p-5">
         <div className="row">
             <div className="card col-md-6 offset-md-3">
-                <h3 className='text-center'>Add Item</h3>
+                <h3 className='text-center add-heading'>Add Item</h3>
                 <div className="card-body">
                     <form action="">
                         <div className="form-group mb-3">

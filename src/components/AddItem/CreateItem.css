@@ -1,0 +1,51 @@
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+  }
+  
+  .card-body {
+    padding: 20px; /* Padding for the card body */
+  }
+  
+  .form-group label {
+    font-weight: 600; /* Bold font weight for labels */
+  }
+  
+  .form-control {
+    width: 100%; /* Full width for form controls */
+    margin-top: 10px;
+  }
+  
+  .btn {
+    cursor: pointer; /* Add pointer cursor to buttons */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .btn-success {
+    background-color: #28a745; /* Green background color for success button */
+    color: #fff; /* Text color */
+  }
+  
+  .btn-success:hover {
+    background-color: #218838; /* Darker green background color on hover */
+  }
+  
+  .add-title{
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 400;
+  }
+
+  .add-heading{
+    padding-top: 10px;
+    font-weight: 400;
+  }
+
+  .dropbox {
+    border: 2px dashed #ced4da;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fff;
+    transition: border-color 0.3s ease; /* Smooth border color transition */
+}
