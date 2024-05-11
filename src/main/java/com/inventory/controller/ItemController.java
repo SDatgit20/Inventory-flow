@@ -27,7 +27,8 @@ public class ItemController {
 	@PostMapping("/items")
 	public Item addItem(@RequestParam("file") MultipartFile file,
 						@RequestParam("name") String name,
-						@RequestParam("description") String description) {
+						@RequestParam("description") String description,
+						@RequestParam("youtubeUrl") String youtubeUrl) {
 		// Save the file and get the URL
 		String fileName = saveFile(file);
 		String fullImageUrl= "http://localhost:8080/images/"+fileName;
@@ -37,6 +38,7 @@ public class ItemController {
 		item.setName(name);
 		item.setDescription(description);
 		item.setImageUrl(fullImageUrl);
+		item.setYoutubeUrl(youtubeUrl);
 
 		// Save the item entity
 		return service.addItem(item);
@@ -64,7 +66,6 @@ public class ItemController {
 	@GetMapping("/items")
 	public List<Item> getAllItems(){
 		List<Item> items = service.getAllItems();
-		System.out.println("path here------>"+items.get(0).getImageUrl());
 		return items;
 	}
 	
