@@ -41,7 +41,7 @@ class SearchItemComponent extends Component {
 
     return (
       <div className="search-container">
-        <h3 className="text-center search-head">Search Item</h3>
+        <h3 className="text-center search-head"></h3>
         <form className="search-form" onSubmit={this.searchItem}>
           <input
             type="text"

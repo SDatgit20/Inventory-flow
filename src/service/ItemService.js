@@ -15,6 +15,7 @@ class ItemService {
         formData.append('file', item.uploadedImage); // Assuming item.file is the uploaded file
         formData.append('name', item.name);
         formData.append('description', item.description);
+        formData.append('youtubeUrl', item.youtubeUrl);
     
         return axios.post(Item_Base_URL, formData, {
             headers: {
